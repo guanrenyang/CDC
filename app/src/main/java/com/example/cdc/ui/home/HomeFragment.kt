@@ -87,7 +87,6 @@ class HomeFragment : Fragment() {
         numberPickerPolicySelection.setOnValueChangedListener { picker, oldVal, newVal ->
             Log.e("home",picker.value.toString())
             binding.edittextSearchPolicy.setText(contentList[binding.numberPickerSearchPolicy.value])
-
         }
 
         return root

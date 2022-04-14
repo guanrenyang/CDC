@@ -1,11 +1,14 @@
 package com.example.cdc.ui.home
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -19,6 +22,12 @@ class ACBoard : AppCompatActivity() {
     private val problemList = arrayOf<String>("name", "sex", "year", "birthday", "address")
     private val answerList = arrayOf<String>("name", "sex", "year", "birthday", "address")
 
+    fun hideKeyboard(view: View){
+        val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        view.requestFocus()
+        inputManager.hideSoftInputFromWindow(view.windowToken,0)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_acboard)
@@ -30,6 +39,10 @@ class ACBoard : AppCompatActivity() {
             print("yes")
             val inputProblemBoard: EditText = findViewById(R.id.editText_inputProblem)
             inputProblemBoard.setText("")
+            val view: View? = this.currentFocus
+            if (view != null) {
+                hideKeyboard(view)
+            }
         }
         //数据库问题显示
         val acboardRecyclerView :RecyclerView = findViewById(R.id.recycler_view_ACBoard)
