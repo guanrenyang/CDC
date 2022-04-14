@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CDC">
         <activity
+            android:name=".ui.home.SelfInfo"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".ui.home.PolicyInfo"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".ui.home.ACBoard"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".ui.SubmitSuccessMessageActivity"
             android:exported="false" />
         <activity
