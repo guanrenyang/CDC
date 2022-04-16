@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.cdc.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_data_processing"
+        android:name="com.example.cdc.ui.dataProcessing.DataProcessingFragment"
+        android:label="@string/title_data_processing"
+        tools:layout="@layout/fragment_data_processing" />
 
     <fragment
         android:id="@+id/navigation_notifications"

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CDC</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_data_processing">数据处理</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_information_submit">信息上报</string>
     <!-- TODO: Remove or change this placeholder text -->

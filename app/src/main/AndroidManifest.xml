@@ -22,6 +22,16 @@
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
         <activity
+            android:name=".ui.dataProcessing.ChangeQuestionnaireContentActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:label="更改问卷内容"/>
+        <activity
+            android:name=".ui.dataProcessing.ViewQuestionnaireListActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:label="问卷列表查看"/>
+        <activity
             android:name=".ui.SubmitSuccessMessageActivity"
             android:exported="false" />
         <activity
