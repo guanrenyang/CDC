@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.cdc.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="com.example.cdc.ui.searchInfo.SearchInfoFragment"
+        android:label="@string/title_search_info"
         tools:layout="@layout/fragment_home" />
 
     <fragment

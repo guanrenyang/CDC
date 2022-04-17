@@ -1,4 +1,4 @@
-package com.example.cdc.ui.home
+package com.example.cdc.ui.searchInfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

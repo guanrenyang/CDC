@@ -11,15 +11,15 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.CDC">
         <activity
-            android:name=".ui.home.SelfInfo"
+            android:name=".ui.searchInfo.SelfInfo"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".ui.home.PolicyInfo"
+            android:name=".ui.searchInfo.PolicyInfo"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".ui.home.ACBoard"
+            android:name=".ui.searchInfo.ACBoard"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
         <activity

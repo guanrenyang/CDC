@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.searchInfo.SearchInfoFragment">
     <!--context的作用是将xml文件与其对应activity的kt文件关联，以此调用对应kt文件，也让其可以通过ViewBinding获取元素-->
 
 

@@ -1,4 +1,4 @@
-package com.example.cdc.ui.home
+package com.example.cdc.ui.searchInfo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.cdc.ui.home
+package com.example.cdc.ui.searchInfo
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,7 @@ import com.example.cdc.databinding.FragmentHomeBinding
 
 
 
-class HomeFragment : Fragment() {
+class SearchInfoFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
