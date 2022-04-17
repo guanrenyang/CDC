@@ -1,4 +1,4 @@
-package com.example.cdc.ui.notifications
+package com.example.cdc.ui.policyIssue
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
