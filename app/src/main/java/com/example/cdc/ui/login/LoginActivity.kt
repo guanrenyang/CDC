@@ -147,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
         ).show()
         Log.e("home","Search Self Information Yes")
         val intent: Intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("account",binding.username.text.toString())
         startActivity(intent)
 
     }

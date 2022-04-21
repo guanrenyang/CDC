@@ -53,6 +53,10 @@ class SelfInfo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_self_info)
 
+        //从外部输入的查询参数account
+        val extraData = intent.getStringExtra("account")
+        Log.e("SelfInfo",extraData.toString())
+
         user_get_table("db_0414")
         //selfInfoRecyclerView.adapter = SelfInfoAdapter(selfInfoList)
     }

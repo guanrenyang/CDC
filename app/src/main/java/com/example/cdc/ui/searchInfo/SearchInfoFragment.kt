@@ -12,6 +12,7 @@ import android.widget.NumberPicker
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.cdc.databinding.FragmentSearchInfoBinding
 
 
@@ -31,29 +32,37 @@ class SearchInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentSearchInfoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         //交流板部分控件
         val buttonACBoard: Button = binding.buttonACBoard
 
 
         buttonACBoard.setOnClickListener(){
-            Log.e("home","ACBoard Button Yes")
+            Log.e("search info","ACBoard Button Yes")
             val intent: Intent = Intent(activity, ACBoard::class.java)
             startActivity(intent)
         }
 
         //查询个人信息部分控件
+
+        //从外部传来的account信息，用于查询个人信息时的key
+        val account = arguments?.getString("account").toString()
+        Log.e("search info", account)
+
         val buttonSearchSelfInfo: Button = binding.buttonSearchSelfInfo
 
 
         buttonSearchSelfInfo.setOnClickListener(){
-            Log.e("home","Search Self Information Yes")
+            Log.e("search info","Search Self Information Yes")
             val intent: Intent = Intent(activity, SelfInfo::class.java)
+            intent.putExtra("account",account.toString())
             startActivity(intent)
         }
 
@@ -73,19 +82,19 @@ class SearchInfoFragment : Fragment() {
 
 
         buttonSearchPolicy.setOnClickListener(){
-            Log.e("home","Search Policy Yes")
+            Log.e("search info","Search Policy Yes")
             val intent: Intent = Intent(activity, PolicyInfo::class.java)
             startActivity(intent)
         }
 
         editTextSearchPolicy.setOnClickListener(){
-            Log.e("home",contentList[binding.numberPickerSearchPolicy.value])
+            Log.e("search info",contentList[binding.numberPickerSearchPolicy.value])
             binding.edittextSearchPolicy.setText(contentList[binding.numberPickerSearchPolicy.value])
             binding.numberPickerSearchPolicy.isVisible = !binding.numberPickerSearchPolicy.isVisible
         }
 
         numberPickerPolicySelection.setOnValueChangedListener { picker, oldVal, newVal ->
-            Log.e("home",picker.value.toString())
+            Log.e("search info",picker.value.toString())
             binding.edittextSearchPolicy.setText(contentList[binding.numberPickerSearchPolicy.value])
         }
 
