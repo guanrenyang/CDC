@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import com.example.cdc.AdministratorActivity
+import com.example.cdc.CommonUserActivity
 import com.example.cdc.databinding.ActivityLoginBinding
 
 import com.example.cdc.R
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         val login = binding.login
         val loading = binding.loading
 
-        binding.username.setText("CDC")
+        binding.username.setText("common_user")
         binding.password.setText("123456")
         login.isEnabled = true
 
@@ -146,9 +147,19 @@ class LoginActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).show()
         Log.e("home","Search Self Information Yes")
-        val intent: Intent = Intent(this, AdministratorActivity::class.java)
-        intent.putExtra("account",binding.username.text.toString())
-        startActivity(intent)
+        //普通用户
+        if(model.type == 0){
+            val intent: Intent = Intent(this, CommonUserActivity::class.java)
+            intent.putExtra("account",binding.username.text.toString())
+            startActivity(intent)
+        }
+        //管理员
+        if(model.type == 1){
+            val intent: Intent = Intent(this, AdministratorActivity::class.java)
+            intent.putExtra("account",binding.username.text.toString())
+            startActivity(intent)
+        }
+
 
     }
 

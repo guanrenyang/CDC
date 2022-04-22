@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_search_info">
-
-    <fragment
-        android:id="@+id/navigation_search_info"
-        android:name="com.example.cdc.ui.searchInfo.SearchInfoFragment"
-        android:label="@string/title_search_info"
-        tools:layout="@layout/fragment_search_info" />
+    app:startDestination="@+id/navigation_data_processing">
 
     <fragment
         android:id="@+id/navigation_data_processing"
@@ -22,9 +16,5 @@
         android:name="com.example.cdc.ui.policyIssue.PolicyIssueFragment"
         android:label="@string/title_policy_issue"
         tools:layout="@layout/fragment_policy_issue" />
-    <fragment
-        android:id="@+id/navigation_information_report"
-        android:name="com.example.cdc.ui.InformationReportFragment"
-        android:label="@string/title_information_submit"
-        tools:layout="@layout/fragment_information_report" />
+
 </navigation>

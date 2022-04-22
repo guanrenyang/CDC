@@ -5,5 +5,6 @@ package com.example.cdc.data.model
  */
 data class LoggedInUser(
     val userId: String,
-    val displayName: String
+    val displayName: String,
+    val type: Int
 )

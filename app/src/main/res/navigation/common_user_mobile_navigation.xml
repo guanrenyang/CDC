@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_search_info">
+
+    <fragment
+        android:id="@+id/navigation_search_info"
+        android:name="com.example.cdc.ui.searchInfo.SearchInfoFragment"
+        android:label="@string/title_search_info"
+        tools:layout="@layout/fragment_search_info" />
+
+    <fragment
+        android:id="@+id/navigation_information_report"
+        android:name="com.example.cdc.ui.InformationReportFragment"
+        android:label="@string/title_information_submit"
+        tools:layout="@layout/fragment_information_report" />
+
+</navigation>

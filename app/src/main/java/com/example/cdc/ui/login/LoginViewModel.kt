@@ -25,7 +25,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             //这里是将LoggedInUserView中的displayName赋值为想要的string
             //例如成功时应当将success设置为非null的对应值
             _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+                LoginResult(success = LoggedInUserView(displayName = result.data.displayName, type = result.data.type))
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }

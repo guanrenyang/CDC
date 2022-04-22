@@ -13,6 +13,10 @@
         android:theme="@style/Theme.CDC"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CommonUserActivity"
+            android:exported="false"
+            android:label="@string/title_activity_common_user" />
+        <activity
             android:name=".ui.searchInfo.SelfInfo"
             android:exported="false"
             android:parentActivityName=".AdministratorActivity" />
@@ -60,7 +64,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
