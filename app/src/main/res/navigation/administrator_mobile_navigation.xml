@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_data_processing" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_policy_issue"
         android:name="com.example.cdc.ui.policyIssue.PolicyIssueFragment"
         android:label="@string/title_policy_issue"
         tools:layout="@layout/fragment_policy_issue" />
