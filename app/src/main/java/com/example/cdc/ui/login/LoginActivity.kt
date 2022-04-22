@@ -16,7 +16,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import com.example.cdc.MainActivity
+import com.example.cdc.AdministratorActivity
 import com.example.cdc.databinding.ActivityLoginBinding
 
 import com.example.cdc.R
@@ -146,7 +146,7 @@ class LoginActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).show()
         Log.e("home","Search Self Information Yes")
-        val intent: Intent = Intent(this, MainActivity::class.java)
+        val intent: Intent = Intent(this, AdministratorActivity::class.java)
         intent.putExtra("account",binding.username.text.toString())
         startActivity(intent)
 

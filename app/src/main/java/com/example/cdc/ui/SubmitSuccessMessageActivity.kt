@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.cdc.MainActivity
+import com.example.cdc.AdministratorActivity
 import com.example.cdc.R
 
 class SubmitSuccessMessageActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class SubmitSuccessMessageActivity : AppCompatActivity() {
         val submitSuccessReturnButton : Button = findViewById(R.id.submit_success_return_button)
 
         submitSuccessReturnButton.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, AdministratorActivity::class.java))
         }
     }
 }

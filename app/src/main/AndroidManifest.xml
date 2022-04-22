@@ -15,25 +15,25 @@
         <activity
             android:name=".ui.searchInfo.SelfInfo"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.searchInfo.PolicyInfo"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.searchInfo.ACBoard"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.dataProcessing.ChangeQuestionnaireContentActivity"
             android:exported="false"
             android:label="更改问卷内容"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.dataProcessing.ViewQuestionnaireListActivity"
             android:exported="false"
             android:label="问卷列表查看"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.SubmitSuccessMessageActivity"
             android:exported="false" />
@@ -48,11 +48,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".AdministratorActivity"
             android:exported="false"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.BASIC_ACTIVITY" />
+                <action android:name="android.intent.action.ADMINISTRATOR_ACTIVITY" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
