@@ -39,6 +39,11 @@
             android:label="问卷列表查看"
             android:parentActivityName=".AdministratorActivity" />
         <activity
+            android:name=".ui.dataProcessing.ViewQuestionnaireActivity"
+            android:exported="false"
+            android:label="问卷信息查看"
+            android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity"/>
+        <activity
             android:name=".ui.SubmitSuccessMessageActivity"
             android:exported="false" />
         <activity

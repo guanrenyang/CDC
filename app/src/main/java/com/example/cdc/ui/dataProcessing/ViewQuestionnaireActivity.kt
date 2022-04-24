@@ -1,6 +1,5 @@
 package com.example.cdc.ui.dataProcessing
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,36 +12,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
 
+class ViewQuestionnaireActivity : AppCompatActivity() {
 
-class ViewQuestionnaireListActivity : AppCompatActivity() {
-
-    private val nameList = arrayOf<String>("AAA", "BBB", "CCC", "DDD", "EEE")
-    private val idList = arrayOf<String>("111", "222", "333", "444", "555")
+    private val questionList = arrayOf<String>("name", "sex", "year", "birthday", "address")
+    private val answerList = arrayOf<String>("aaa", "bbb", "ccc", "ddd", "eee")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_questionnaire_list)
+        setContentView(R.layout.activity_view_questionnaire)
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true)
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
-        val questionnaireListRecyclerView: RecyclerView = findViewById(R.id.questionnaire_list)
+        val questionnaireRecyclerView: RecyclerView = findViewById(R.id.questionnaire)
 
-        questionnaireListRecyclerView.adapter = QuestionnaireListAdapter(nameList, idList)
+        questionnaireRecyclerView.adapter = QuestionnaireAdapter(questionList, answerList)
 
     }
 
-    class QuestionnaireListAdapter(val nameList: Array<String>, val idList: Array<String>) :
-        RecyclerView.Adapter<QuestionnaireListViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionnaireListViewHolder {
+    class QuestionnaireAdapter(val questionList: Array<String>, val answerList: Array<String>) :
+        RecyclerView.Adapter<QuestionnaireViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionnaireViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_name_id, parent, false)
-            return QuestionnaireListViewHolder(view)
+            return QuestionnaireViewHolder(view)
         }
 
-        override fun onBindViewHolder(holder: QuestionnaireListViewHolder, position: Int) {
-            holder.bind(nameList[position], idList[position])
+        override fun onBindViewHolder(holder: QuestionnaireViewHolder, position: Int) {
+            holder.bind(questionList[position], answerList[position])
             holder.itemView.setOnClickListener { view ->
                 val intent = Intent(view.context, ViewQuestionnaireActivity::class.java)
                 view.context.startActivity(intent)
@@ -50,11 +48,11 @@ class ViewQuestionnaireListActivity : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int {
-            return nameList.size
+            return questionList.size
         }
     }
 
-    class QuestionnaireListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class QuestionnaireViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.name_text)
         private val idTextView: TextView = itemView.findViewById(R.id.id_text)
         fun bind(name: String, id: String) {
