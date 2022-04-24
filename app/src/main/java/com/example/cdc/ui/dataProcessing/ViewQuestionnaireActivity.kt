@@ -32,7 +32,15 @@ class ViewQuestionnaireActivity : AppCompatActivity() {
     }
 
     class QuestionnaireAdapter(val questionList: Array<String>, val answerList: Array<String>) :
-        RecyclerView.Adapter<QuestionnaireViewHolder>() {
+        RecyclerView.Adapter<QuestionnaireAdapter.QuestionnaireViewHolder>() {
+        inner class QuestionnaireViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            private val nameTextView: TextView = itemView.findViewById(R.id.name_text)
+            private val idTextView: TextView = itemView.findViewById(R.id.id_text)
+            fun bind(name: String, id: String) {
+                nameTextView.text = name
+                idTextView.text = id
+            }
+        }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionnaireViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_name_id, parent, false)
@@ -52,14 +60,7 @@ class ViewQuestionnaireActivity : AppCompatActivity() {
         }
     }
 
-    class QuestionnaireViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.name_text)
-        private val idTextView: TextView = itemView.findViewById(R.id.id_text)
-        fun bind(name: String, id: String) {
-            nameTextView.text = name
-            idTextView.text = id
-        }
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

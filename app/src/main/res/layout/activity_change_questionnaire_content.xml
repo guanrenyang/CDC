@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <Button
-        android:id="@+id/add_button"
+        android:id="@+id/add_button_ChangeQuestionnaireContent"
         style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -39,5 +39,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ChangeQuestionnaireContent_list"
+        android:layout_width="368dp"
+        android:layout_height="509dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

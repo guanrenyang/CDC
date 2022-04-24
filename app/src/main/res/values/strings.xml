@@ -19,6 +19,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="x">X</string>
+    <string name="e">E</string>
+    <string name="save">√</string>
+    <string name="edit">E</string>
 
 
 </resources>
