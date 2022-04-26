@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CDC"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.policyIssue.MotifyPolicyInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".CommonUserActivity"
             android:exported="false"
             android:label="@string/title_activity_common_user" />
@@ -42,7 +45,7 @@
             android:name=".ui.dataProcessing.ViewQuestionnaireActivity"
             android:exported="false"
             android:label="问卷信息查看"
-            android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity"/>
+            android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity" />
         <activity
             android:name=".ui.SubmitSuccessMessageActivity"
             android:exported="false" />

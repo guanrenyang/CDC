@@ -21,12 +21,47 @@ import com.example.cdc.CommonUserActivity
 import com.example.cdc.databinding.ActivityLoginBinding
 
 import com.example.cdc.R
+import okhttp3.*
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
+    /*val BASE_URL ="http://124.71.150.114"
+    val client: OkHttpClient = OkHttpClient.Builder()    //builder构造者设计模式
+        .connectTimeout(10, TimeUnit.SECONDS) //连接超时时间
+        .readTimeout(10, TimeUnit.SECONDS)    //读取超时
+        .writeTimeout(10, TimeUnit.SECONDS)  //写超时，也就是请求超时
+        .build();
+    /*
+        * user_login(name,password):用户和管理员通过该函数登录app
+        * 若密码正确则返回1
+        * 密码错误返回0
+        * 用户名不存在则返回空字符串
+        * 测试数据:user_login("common_user",123456)  user_login("administrator",123456)
+        * */
+    fun user_login(name:String,password:String){
+        val request: Request = Request.Builder()
+            .url("${BASE_URL}/user_login.php?name=$name&password=$password")
+            .build()
+        val call: Call = client.newCall(request)
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("OkHttp","get response onFailure :${e.message}")
+            }
 
+            override fun onResponse(call: Call, response: Response) {
+                val body:String? = response.body?.string()
+                runOnUiThread { //
+                    //todo
+                }
+                Log.e("OkHttp","get response successfully :${body}")
+            }
+
+        })
+    }*/
     fun hideKeyboard(view: View){
         val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         view.requestFocus()

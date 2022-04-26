@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
 import android.util.Log
+import android.widget.Toast
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -20,6 +21,32 @@ class SelfInfo : AppCompatActivity() {
         .readTimeout(10, TimeUnit.SECONDS)    //读取超时
         .writeTimeout(10, TimeUnit.SECONDS)  //写超时，也就是请求超时
         .build();
+    /*
+    *  user_get_selfinfo(Id:String):用户通过该函数向个人信息数据库请求数据，输入参数为个人的id
+        get成功后返回一个String，每个元素用 ; 隔开。元素分别是id;name;age;address;gender(0-->女人，1-->男人);healthy(0-->未感染新冠，1-->感染新冠)
+        可以使用string.split()函数解析报文
+        测试数据:uesr_get_selfinfo("0318")
+    */
+    fun user_get_selfinfo(Id: String){
+        val request: Request = Request.Builder()
+            .url("${BASE_URL}/user_get_selfinfo.php?Id=$Id")
+            .build()
+        val call:Call = client.newCall(request)
+        call.enqueue(object :Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("OkHttp","get response onFailure :${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val body:String? = response.body?.string()
+                runOnUiThread { //
+
+                }
+                Log.e("OkHttp","get response successfully :${body}")
+            }
+
+        })
+    }
     fun user_get_table(Date: String){
         val request: Request = Request.Builder()
             .url("${BASE_URL}/user_get_table.php?Date=$Date")
