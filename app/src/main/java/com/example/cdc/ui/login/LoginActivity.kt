@@ -12,7 +12,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -29,7 +28,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
-    /*val BASE_URL ="http://124.71.150.114"
+
+    val BASE_URL ="http://124.71.150.114"
     val client: OkHttpClient = OkHttpClient.Builder()    //builder构造者设计模式
         .connectTimeout(10, TimeUnit.SECONDS) //连接超时时间
         .readTimeout(10, TimeUnit.SECONDS)    //读取超时
@@ -55,13 +55,16 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body:String? = response.body?.string()
                 runOnUiThread { //
-                    //todo
+                    //解析响应报文body:
+                    var res = body?.split(";")
+                    val res_array:Array<String> = res?.toTypedArray()!!
                 }
                 Log.e("OkHttp","get response successfully :${body}")
             }
 
         })
-    }*/
+    }
+
     fun hideKeyboard(view: View){
         val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         view.requestFocus()
@@ -148,22 +151,36 @@ class LoginActivity : AppCompatActivity() {
                 )
             }
 
-            //对password这个editText设置action监听，当actionId对上时与对不上时做出相应的反应
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                            username.text.toString(),
-                            password.text.toString()
-                        )
-                }
-                false
-            }
 
             //登录button的click监听，设置loading动画，调用login函数进行上方的login调用，进行login的判断
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                val nameStr: String = username.text.toString()
+                val passwordStr: String = password.text.toString()
+                loginViewModel.login(nameStr, passwordStr, "result")
+//                val request: Request = Request.Builder()
+//                    .url("${BASE_URL}/user_login.php?name=$nameStr&password=$passwordStr")
+//                    .build()
+//                val call: Call = client.newCall(request)
+//                call.enqueue(object : Callback {
+//                    override fun onFailure(call: Call, e: IOException) {
+//                        loginViewModel.login(nameStr, passwordStr, "-1")
+//                        Log.e("OkHttp","get response onFailure :${e.message}")
+//                    }
+//
+//                    override fun onResponse(call: Call, response: Response) {
+//                        val body:String? = response.body?.string()
+//                        runOnUiThread { //
+//                            //解析响应报文body:
+//                            var res = body?.split(";")
+//                            val res_array:Array<String> = res?.toTypedArray()!!
+//                            val result : String = res_array[0]
+//                            loginViewModel.login(nameStr, passwordStr, result)
+//                        }
+//                        Log.e("OkHttp","get response successfully :${body}")
+//                    }
+//                })
+
             }
         }
 

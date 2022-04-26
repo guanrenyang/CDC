@@ -1,14 +1,19 @@
 package com.example.cdc.data
 
+import android.util.Log
 import com.example.cdc.data.model.LoggedInUser
+import okhttp3.*
 import java.io.IOException
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    fun login(username: String, password: String, result:String): Result<LoggedInUser> {
+        Log.e("OkHttp", result[0].toString())
         try {
             //普通用户
             if(username == "common_user" && password == "123456"){
@@ -30,6 +35,16 @@ class LoginDataSource {
 
                 return Result.Success(fakeUser)
             }
+//            if(result[0] == '1'){
+//                val type: Int = 1
+//                val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), username, type)
+//                return Result.Success(fakeUser)
+//            }
+//            if(result[0] == '0'){
+//                val type: Int = 0
+//                val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), username, type)
+//                return Result.Success(fakeUser)
+//            }
             else{
                 throw Exception("account-password pair error")
             }

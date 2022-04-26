@@ -17,9 +17,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
+    fun login(username: String, password: String, result: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+        val result = loginRepository.login(username, password, result)
         //通过loginRepository来获取登录校验结果
         if (result is Result.Success) {
             //这里是将LoggedInUserView中的displayName赋值为想要的string

@@ -40,39 +40,15 @@ class SelfInfo : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body:String? = response.body?.string()
                 runOnUiThread { //
-
-                }
-                Log.e("OkHttp","get response successfully :${body}")
-            }
-
-        })
-    }
-    fun user_get_table(Date: String){
-        val request: Request = Request.Builder()
-            .url("${BASE_URL}/user_get_table.php?Date=$Date")
-            .build()
-        val call:Call = client.newCall(request)
-        call.enqueue(object :Callback{
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("OkHttp","get response onFailure :${e.message}")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val body:String? = response.body?.string()
-                runOnUiThread {
-                    //在这里进行UI界面的操作
-
                     //解析响应报文body:
                     var res = body?.split(";")
                     val res_array:Array<String> = res?.toTypedArray()!!
-
-                    //对UI界面进行操作
                     val selfInfoRecyclerView: RecyclerView = findViewById(R.id.recycler_view_self_info)
                     selfInfoRecyclerView.adapter = SelfInfoAdapter(res_array)
-                    //Toast.makeText(this@SelfInfo ,"${res}", Toast.LENGTH_LONG).show();
                 }
                 Log.e("OkHttp","get response successfully :${body}")
             }
+
         })
     }
 
@@ -84,7 +60,7 @@ class SelfInfo : AppCompatActivity() {
         val extraData = intent.getStringExtra("account")
         Log.e("SelfInfo",extraData.toString())
 
-        user_get_table("db_0414")
+        user_get_selfinfo("0318")
         //selfInfoRecyclerView.adapter = SelfInfoAdapter(selfInfoList)
     }
 
@@ -98,11 +74,39 @@ class SelfInfo : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: SelfInfoViewHolder, position: Int) {
-            holder.bind(selfInfoList[position])
+            if(position % 6 == 0){
+                holder.bind("ID: "+selfInfoList[position])
+            }
+            if(position % 6 == 1){
+                holder.bind("Name: "+selfInfoList[position])
+            }
+            if(position % 6 == 2){
+                holder.bind("Age: "+selfInfoList[position])
+            }
+            if(position % 6 == 3){
+                holder.bind("Address: "+selfInfoList[position])
+            }
+            if(position % 6 == 4){
+                if(selfInfoList[position][0]=='0'){
+                    holder.bind("Sex: 女")
+                }
+                if(selfInfoList[position][0]=='1'){
+                    holder.bind("Sex: 男")
+                }
+            }
+            if(position % 6 == 5){
+                if(selfInfoList[position][0]=='0'){
+                    holder.bind("Health: 未感染新冠")
+                }
+                if(selfInfoList[position][0]=='1'){
+                    holder.bind("Health: 感染新冠")
+                }
+            }
+
         }
 
         override fun getItemCount(): Int {
-            return selfInfoList.size
+            return selfInfoList.size - 1
         }
 
     }

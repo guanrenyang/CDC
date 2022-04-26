@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 class PolicyInfo : AppCompatActivity() {
 
     private val policyInfoList = arrayOf<String>("name", "sex", "year", "birthday", "address")
-    /*val BASE_URL ="http://124.71.150.114"
+    val BASE_URL ="http://124.71.150.114"
     val client: OkHttpClient = OkHttpClient.Builder()    //builder构造者设计模式
         .connectTimeout(10, TimeUnit.SECONDS) //连接超时时间
         .readTimeout(10, TimeUnit.SECONDS)    //读取超时
@@ -25,7 +25,7 @@ class PolicyInfo : AppCompatActivity() {
         .build();
     /*
         user_get_policy(Type,Date):用户通过调用该函数来获得政策，筛选条件是Type（S0~S5）和Date(eg:2022-04-25)。可以有缺省
-        获得的相应报文（val body:String?）格式如下:每条政策之间用换行符“\n”隔开，每条政策有id、type、date、content共四条属性，它们之间用";"隔开.
+        获得的相应报文（val body:String?）格式如下:每条政策之间用换行符“\n”隔开，每条政策有id、date、type、content共四条属性，它们之间用";"隔开.
         你可以使用kotlin中String类的split()来解析相应报文
         测试数据:        //user_get_policy(Type = "S1")
                        //user_get_policy(Date = "2022-04-18")
@@ -44,19 +44,31 @@ class PolicyInfo : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body:String? = response.body?.string()
                 runOnUiThread {
+                    //解析响应报文body:
+                    var res = body?.split(";")
+                    val res_array:Array<String> = res?.toTypedArray()!!
+                    if(res_array.size == 1){
+                        val noPolicyText: TextView = findViewById(R.id.title_no_policy_info)
+                        noPolicyText.visibility = View.VISIBLE
+                    }
                     //在这里完成对UI界面的控制
+                    val policyInfoRecyclerView: RecyclerView = findViewById(R.id.recycler_view_policy_info)
+                    policyInfoRecyclerView.adapter = PolicyInfoAdapter(res_array)
                 }
                 Log.e("OkHttp","get response successfully :${body}")
             }
 
         })
-    }*/
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_policy_info)
-
-        val policyInfoRecyclerView: RecyclerView = findViewById(R.id.recycler_view_policy_info)
-        policyInfoRecyclerView.adapter = PolicyInfoAdapter(policyInfoList)
+        val noPolicyText: TextView = findViewById(R.id.title_no_policy_info)
+        noPolicyText.visibility = View.INVISIBLE
+        val extraData = intent.getStringExtra("PolicyType")
+        Log.e("PolicyInfo",extraData.toString())
+        user_get_policy(extraData.toString())
     }
 
 
@@ -68,11 +80,22 @@ class PolicyInfo : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: PolicyInfoViewHolder, position: Int) {
-            holder.bind(policyInfoList[position])
+            if(position % 4 == 0){
+                holder.bind("ID: "+policyInfoList[position])
+            }
+            if(position % 4 == 1){
+                holder.bind("Date: "+policyInfoList[position])
+            }
+            if(position % 4 == 2){
+                holder.bind("Policy Type: "+policyInfoList[position])
+            }
+            if(position % 4 == 3){
+                holder.bind("Content: "+policyInfoList[position])
+            }
         }
 
         override fun getItemCount(): Int {
-            return policyInfoList.size
+            return policyInfoList.size - 1
         }
 
     }

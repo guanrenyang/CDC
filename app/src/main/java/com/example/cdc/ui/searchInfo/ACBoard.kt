@@ -24,7 +24,7 @@ class ACBoard : AppCompatActivity() {
 
     private val problemList = arrayOf<String>("name", "sex", "year", "birthday", "address")
     private val answerList = arrayOf<String>("name", "sex", "year", "birthday", "address")
-    /*val BASE_URL ="http://124.71.150.114"
+    val BASE_URL ="http://124.71.150.114"
     val client: OkHttpClient = OkHttpClient.Builder()    //builder构造者设计模式
         .connectTimeout(10, TimeUnit.SECONDS) //连接超时时间
         .readTimeout(10, TimeUnit.SECONDS)    //读取超时
@@ -48,13 +48,19 @@ class ACBoard : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body:String? = response.body?.string()
                 runOnUiThread { //
+                    //解析响应报文body:
+                    var res = body?.split(";")
+                    val res_array:Array<String> = res?.toTypedArray()!!
+                    val acboardRecyclerView :RecyclerView = findViewById(R.id.recycler_view_ACBoard)
+                    acboardRecyclerView.adapter = ACBoardAdapter(res_array)
                     //todo...
                 }
                 Log.e("OkHttp","get response successfully :${body}")
             }
 
         })
-    }*/
+    }
+
     fun hideKeyboard(view: View){
         val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         view.requestFocus()
@@ -64,6 +70,7 @@ class ACBoard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_acboard)
+
 
         //提交按钮
         val submitButton: Button = findViewById(R.id.button_submitProblem)
@@ -78,17 +85,14 @@ class ACBoard : AppCompatActivity() {
             }
         }
         //数据库问题显示
-        val acboardRecyclerView :RecyclerView = findViewById(R.id.recycler_view_ACBoard)
-        acboardRecyclerView.adapter = ACBoardAdapter(problemList, answerList)
+        user_get_ACBoard()
 
-        val divisionLine : DividerItemDecoration
-        //divisionLine.setOrientation()
-        //acboardRecyclerView.addItemDecoration(DividerItemDecoration.VERTICAL)
+
     }
 
 
 
-    class ACBoardAdapter(val problemList: Array<String>, val answerList: Array<String>): RecyclerView.Adapter<ACBoardViewHolder>(){
+    class ACBoardAdapter(val pairList: Array<String>): RecyclerView.Adapter<ACBoardViewHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ACBoardViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_acboard, parent, false)
@@ -96,11 +100,11 @@ class ACBoard : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ACBoardViewHolder, position: Int) {
-            holder.bind(problemList[position], answerList[position])
+            holder.bind(pairList[3*position+1], pairList[3*position+2])
         }
 
         override fun getItemCount(): Int {
-            return problemList.size
+            return (pairList.size/3)
         }
 
     }
@@ -109,8 +113,8 @@ class ACBoard : AppCompatActivity() {
         private val problemTextView : TextView = itemView.findViewById(R.id.ACBoard_problem_text)
         private val answerTextView : TextView = itemView.findViewById(R.id.ACBoard_answer_text)
         fun bind(problem: String, answer: String){
-            problemTextView.text = problem
-            answerTextView.text = answer
+            problemTextView.text = "问题: "+ problem
+            answerTextView.text = "回答: "+answer
         }
     }
 

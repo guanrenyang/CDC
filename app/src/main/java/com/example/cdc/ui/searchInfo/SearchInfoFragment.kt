@@ -25,7 +25,7 @@ class SearchInfoFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val contentList = arrayOf<String>("尝试", "或许", "也许")
+    private val contentList = arrayOf<String>("S0", "S1", "S2", "S3", "S4", "S5")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,6 +84,7 @@ class SearchInfoFragment : Fragment() {
         buttonSearchPolicy.setOnClickListener(){
             Log.e("search info","Search Policy Yes")
             val intent: Intent = Intent(activity, PolicyInfo::class.java)
+            intent.putExtra("PolicyType",binding.edittextSearchPolicy.text.toString())
             startActivity(intent)
         }
 
