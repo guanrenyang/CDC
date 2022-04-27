@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isVisible
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -34,6 +35,10 @@ class SelfInfo : AppCompatActivity() {
         val call:Call = client.newCall(request)
         call.enqueue(object :Callback{
             override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    val connectionFailedText: TextView = findViewById(R.id.title_self_info_connection_failed)
+                    connectionFailedText.isVisible = true
+                }
                 Log.e("OkHttp","get response onFailure :${e.message}")
             }
 
@@ -55,6 +60,11 @@ class SelfInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_self_info)
+
+        val noSelfInfoText: TextView = findViewById(R.id.title_no_self_info)
+        noSelfInfoText.isVisible = false
+        val connectionFailedText: TextView = findViewById(R.id.title_self_info_connection_failed)
+        connectionFailedText.isVisible = false
 
         //从外部输入的查询参数account
         val extraData = intent.getStringExtra("account")

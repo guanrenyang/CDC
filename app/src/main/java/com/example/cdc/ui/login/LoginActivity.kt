@@ -164,7 +164,10 @@ class LoginActivity : AppCompatActivity() {
 //                val call: Call = client.newCall(request)
 //                call.enqueue(object : Callback {
 //                    override fun onFailure(call: Call, e: IOException) {
-//                        loginViewModel.login(nameStr, passwordStr, "-1")
+//                        runOnUiThread {
+//                            loginViewModel.login(nameStr, passwordStr, "-1")
+//                            Toast.makeText(applicationContext, "Connection Failed", Toast.LENGTH_SHORT).show();
+//                        }
 //                        Log.e("OkHttp","get response onFailure :${e.message}")
 //                    }
 //

@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
@@ -42,6 +43,10 @@ class ACBoard : AppCompatActivity() {
         val call: Call = client.newCall(request)
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    val connectionFailedText: TextView = findViewById(R.id.title_ACBoard_connection_failed)
+                    connectionFailedText.isVisible = true
+                }
                 Log.e("OkHttp","get response onFailure :${e.message}")
             }
 
@@ -71,6 +76,10 @@ class ACBoard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_acboard)
 
+        val noACBoardText: TextView = findViewById(R.id.title_no_ACBoard_info)
+        noACBoardText.isVisible = false
+        val connectionFailedText: TextView = findViewById(R.id.title_ACBoard_connection_failed)
+        connectionFailedText.isVisible = false
 
         //提交按钮
         val submitButton: Button = findViewById(R.id.button_submitProblem)

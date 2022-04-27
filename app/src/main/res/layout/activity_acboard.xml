@@ -69,6 +69,36 @@
         android:background="#F0F0F0"
         />
 
+    <TextView
+        android:id="@+id/title_no_ACBoard_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Policy Found"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_ACBoard_connection_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connection Failed"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
 
 
 

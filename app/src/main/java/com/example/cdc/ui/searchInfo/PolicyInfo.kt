@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
 import okhttp3.*
@@ -38,6 +39,10 @@ class PolicyInfo : AppCompatActivity() {
         val call: Call = client.newCall(request)
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread{
+                    val connectionFailedText: TextView = findViewById(R.id.title_policy_info_connection_failed)
+                    connectionFailedText.isVisible = true
+                }
                 Log.e("OkHttp","get response onFailure :${e.message}")
             }
 
@@ -64,11 +69,32 @@ class PolicyInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_policy_info)
+
         val noPolicyText: TextView = findViewById(R.id.title_no_policy_info)
-        noPolicyText.visibility = View.INVISIBLE
-        val extraData = intent.getStringExtra("PolicyType")
-        Log.e("PolicyInfo",extraData.toString())
-        user_get_policy(extraData.toString())
+        noPolicyText.isVisible = false
+        val connectionFailedText: TextView = findViewById(R.id.title_policy_info_connection_failed)
+        connectionFailedText.isVisible = false
+        val noInputText: TextView = findViewById(R.id.title_no_information_input)
+        noInputText.isVisible = false
+
+        val policyType = intent.getStringExtra("PolicyType")
+        val dateSelected = intent.getStringExtra("DateSelected")
+        val isPolicyTypeEmpty = (dateSelected.toString() == "")
+        val isDateEmpty = (policyType.toString() == "")
+        Log.e("PolicyInfo",policyType.toString())
+        Log.e("PolicyInfo",dateSelected.toString())
+        if(isPolicyTypeEmpty and isDateEmpty){
+            noInputText.isVisible = true
+        }
+        else if(isPolicyTypeEmpty){
+            user_get_policy(Date = dateSelected.toString())
+        }
+        else if(isDateEmpty){
+            user_get_policy(Type = policyType.toString())
+        }
+        else{
+            user_get_policy(policyType.toString(), dateSelected.toString())
+        }
     }
 
 
