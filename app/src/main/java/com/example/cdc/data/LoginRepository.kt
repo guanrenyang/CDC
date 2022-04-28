@@ -30,13 +30,13 @@ class LoginRepository(val dataSource: LoginDataSource) {
     fun login(username: String, password: String, result: String): Result<LoggedInUser> {
         // handle login
         //调用dataSource类中的login函数来获取结果
-        val result = dataSource.login(username, password, result)
+        val resultTotal = dataSource.login(username, password, result)
         //如果成功，就将LoginRepository中的user设置为该用户的用户名
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
+        if (resultTotal is Result.Success) {
+            setLoggedInUser(resultTotal.data)
         }
         //此处没有错误返回处理，直接返回结果即可
-        return result
+        return resultTotal
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser) {

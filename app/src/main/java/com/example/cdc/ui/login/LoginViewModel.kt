@@ -19,15 +19,21 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun login(username: String, password: String, result: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password, result)
+        val resultTotal = loginRepository.login(username, password, result)
         //通过loginRepository来获取登录校验结果
-        if (result is Result.Success) {
+        if (resultTotal is Result.Success) {
             //这里是将LoggedInUserView中的displayName赋值为想要的string
             //例如成功时应当将success设置为非null的对应值
             _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName, type = result.data.type))
+                LoginResult(success = LoggedInUserView(displayName = resultTotal.data.displayName, type = resultTotal.data.type))
         } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            if(result[0] == '0'){
+                _loginResult.value = LoginResult(error = R.string.login_failed)
+            }
+            else{
+                _loginResult.value = LoginResult(error = R.string.account_failed)
+            }
+
         }
     }
 

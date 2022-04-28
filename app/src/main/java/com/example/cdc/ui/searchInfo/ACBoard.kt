@@ -1,7 +1,7 @@
 package com.example.cdc.ui.searchInfo
 
+import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
 import okhttp3.*
@@ -82,11 +82,19 @@ class ACBoard : AppCompatActivity() {
         val call:Call = client.newCall(request)
         call.enqueue(object :Callback{
             override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    Toast.makeText(applicationContext, "Post Question Failed", Toast.LENGTH_SHORT).show();
+                }
                 Log.e("OkHttp","get response onFailure :${e.message}")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val body:String? = response.body?.string()
+                runOnUiThread {
+                    val inputProblemBoard: EditText = findViewById(R.id.editText_inputProblem)
+                    inputProblemBoard.setText("")
+                    Toast.makeText(applicationContext, "Post Success", Toast.LENGTH_SHORT).show();
+                }
                 Log.e("OkHttp","get response successfully :${body}")
             }
 
@@ -126,6 +134,19 @@ class ACBoard : AppCompatActivity() {
         inputManager.hideSoftInputFromWindow(view.windowToken,0)
     }
 
+    fun showKeyboard(view: View){
+        val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        view.requestFocus()
+        inputManager.showSoftInput(view, 0)
+    }
+
+    fun toggleSoftInput(view: View) {
+        val imm = view.context
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm?.toggleSoftInput(0, 0)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_acboard)
@@ -135,13 +156,27 @@ class ACBoard : AppCompatActivity() {
         val connectionFailedText: TextView = findViewById(R.id.title_ACBoard_connection_failed)
         connectionFailedText.isVisible = false
 
+        val inputProblemBoard: EditText = findViewById(R.id.editText_inputProblem)
+        inputProblemBoard.showSoftInputOnFocus=false
+
+        inputProblemBoard.setOnClickListener(){
+                val view: View? = this.currentFocus
+                if (view != null) {
+                    toggleSoftInput(view)
+            }
+        }
+
         //提交按钮
         val submitButton: Button = findViewById(R.id.button_submitProblem)
         submitButton.setOnClickListener(){
-            Log.e("home","yes")
-            print("yes")
-            val inputProblemBoard: EditText = findViewById(R.id.editText_inputProblem)
-            inputProblemBoard.setText("")
+            val content: String = inputProblemBoard.text.toString()
+            if(content == ""){
+                Toast.makeText(applicationContext, "Content Couldn't Be Empty", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                user_post_ACBoard(content)
+            }
+
             val view: View? = this.currentFocus
             if (view != null) {
                 hideKeyboard(view)

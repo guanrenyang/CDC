@@ -15,6 +15,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.example.cdc.AdministratorActivity
 import com.example.cdc.CommonUserActivity
 import com.example.cdc.databinding.ActivityLoginBinding
@@ -43,28 +44,7 @@ class LoginActivity : AppCompatActivity() {
         * 第二个bit代表账户的身份信息，管理员身份返回1，普通用户返回0
         * 测试数据:user_login("common_user",123456)  user_login("administrator",123456)
         * */
-    fun user_login(name:String,password:String){
-        val request: Request = Request.Builder()
-            .url("${BASE_URL}/user_login.php?name=$name&password=$password")
-            .build()
-        val call: Call = client.newCall(request)
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("OkHttp","get response onFailure :${e.message}")
-            }
 
-            override fun onResponse(call: Call, response: Response) {
-                val body:String? = response.body?.string()
-                runOnUiThread { //
-                    //解析响应报文body:
-                    var res = body?.split(";")
-                    val res_array:Array<String> = res?.toTypedArray()!!
-                }
-                Log.e("OkHttp","get response successfully :${body}")
-            }
-
-        })
-    }
 
     fun hideKeyboard(view: View){
         val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -143,6 +123,8 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
+        val view: View? = this.currentFocus
+
         password.apply {
             //当editText的控件内text发生改变时，利用loginViewModel提供的loginDataChanged接口将内部存储的username与password改变
             afterTextChanged {
@@ -166,7 +148,7 @@ class LoginActivity : AppCompatActivity() {
 //                call.enqueue(object : Callback {
 //                    override fun onFailure(call: Call, e: IOException) {
 //                        runOnUiThread {
-//                            loginViewModel.login(nameStr, passwordStr, "-1")
+//                            loading.isVisible = false
 //                            Toast.makeText(applicationContext, "Connection Failed", Toast.LENGTH_SHORT).show();
 //                        }
 //                        Log.e("OkHttp","get response onFailure :${e.message}")

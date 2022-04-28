@@ -67,6 +67,8 @@
         android:inputType="textMultiLine"
         android:gravity="top"
         android:background="#F0F0F0"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         />
 
     <TextView
