@@ -37,9 +37,10 @@ class LoginActivity : AppCompatActivity() {
         .build();
     /*
         * user_login(name,password):用户和管理员通过该函数登录app
-        * 若密码正确则返回1
-        * 密码错误返回0
-        * 用户名不存在则返回空字符串
+        * 用户名不存在则返回-1
+        * 若用户名存在，则返回两个bit的数据
+        * 第一个bit代表密码是否正确，若密码正确则返回1，密码错误返回0
+        * 第二个bit代表账户的身份信息，管理员身份返回1，普通用户返回0
         * 测试数据:user_login("common_user",123456)  user_login("administrator",123456)
         * */
     fun user_login(name:String,password:String){

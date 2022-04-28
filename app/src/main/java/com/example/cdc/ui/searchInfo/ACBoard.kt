@@ -65,7 +65,61 @@ class ACBoard : AppCompatActivity() {
 
         })
     }
+    /*
+        * user_post_ACBoard(Content:String):用户通过调用该函数来在公共板上新发布一个提问
+        * 输入参数为一个String，其中是想要提问的内容
+        * eg: user_post_ACBoard("如何才能获得去教育超市购物的名额？")
+        *
+     *  */
+    fun user_post_ACBoard(Content:String){
+        val body :RequestBody= FormBody.Builder()
+            .add("Content",Content)
+            .build();
+        val request: Request = Request.Builder()
+            .url("$BASE_URL/user_post_ACBoard.php")
+            .post(body)
+            .build()
+        val call:Call = client.newCall(request)
+        call.enqueue(object :Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("OkHttp","get response onFailure :${e.message}")
+            }
 
+            override fun onResponse(call: Call, response: Response) {
+                val body:String? = response.body?.string()
+                Log.e("OkHttp","get response successfully :${body}")
+            }
+
+        })
+    }
+    /*
+       * admin_post_ACBoard(Id:String,Content:String):管理员通过该函数在公共板上回答用户的提问
+       * 输入参数id为要回答的问题编号，content是回答的内容
+       * eg:admin_post_ACBoard("3","请在12:00~18:00期间交我办app上摇号报名")
+       *
+    * */
+    fun admin_post_ACBoard(Id:String,Content:String){
+        val body :RequestBody= FormBody.Builder()
+            .add("Id",Id)
+            .add("Content",Content)
+            .build();
+        val request: Request = Request.Builder()
+            .url("$BASE_URL/admin_post_ACBoard.php")
+            .post(body)
+            .build()
+        val call:Call = client.newCall(request)
+        call.enqueue(object :Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("OkHttp","get response onFailure :${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val body:String? = response.body?.string()
+                Log.e("OkHttp","get response successfully :${body}")
+            }
+
+        })
+    }
     fun hideKeyboard(view: View){
         val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         view.requestFocus()
