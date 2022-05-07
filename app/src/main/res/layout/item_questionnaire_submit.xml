@@ -6,26 +6,28 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/questionnaire_question_text"
+        android:id="@+id/questionnaire_submit_question_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="16sp"
         android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/questionnaire_answer_text"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/questionnaire_submit_answer_text"
         android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
+        android:inputType="text"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionnaire_question_text" />
-
+        app:layout_constraintTop_toBottomOf="@+id/questionnaire_submit_question_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

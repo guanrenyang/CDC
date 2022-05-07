@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:gravity="top"
+        android:gravity="center"
         android:inputType="textMultiLine"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"

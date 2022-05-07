@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cdc">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,7 +19,8 @@
         <activity
             android:name=".CommonUserActivity"
             android:exported="false"
-            android:label="@string/title_activity_common_user" />
+            android:label="@string/title_activity_common_user"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".ui.searchInfo.SelfInfo"
             android:exported="false"
@@ -42,15 +44,20 @@
             android:label="问卷列表查看"
             android:parentActivityName=".AdministratorActivity" />
         <activity
+            android:name=".ui.dataProcessing.ViewAbnormalQuestionnaireListActivity"
+            android:exported="false"
+            android:label="异常问卷列表查看"
+            android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity" />
+        <activity
             android:name=".ui.dataProcessing.ViewQuestionnaireActivity"
             android:exported="false"
             android:label="问卷信息查看"
             android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity" />
         <activity
-            android:name=".ui.SubmitSuccessMessageActivity"
+            android:name=".ui.informationReport.SubmitSuccessMessageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.SpecialConditionActivity"
+            android:name=".ui.informationReport.SpecialConditionActivity"
             android:exported="false"
             android:label="特殊信息上报">
             <intent-filter>
@@ -62,7 +69,8 @@
         <activity
             android:name=".AdministratorActivity"
             android:exported="false"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.ADMINISTRATOR_ACTIVITY" />
 

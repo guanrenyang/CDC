@@ -5,7 +5,7 @@
     android:id="@+id/submit_success_return_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SubmitSuccessMessageActivity">
+    tools:context=".ui.informationReport.SubmitSuccessMessageActivity">
 
     <TextView
         android:id="@+id/submit_success_message"

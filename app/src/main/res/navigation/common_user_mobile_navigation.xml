@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_information_report"
-        android:name="com.example.cdc.ui.InformationReportFragment"
+        android:name="com.example.cdc.ui.informationReport.InformationReportFragment"
         android:label="@string/title_information_submit"
         tools:layout="@layout/fragment_information_report" />
 

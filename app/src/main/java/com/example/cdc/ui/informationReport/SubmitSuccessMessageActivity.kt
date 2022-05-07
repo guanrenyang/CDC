@@ -1,10 +1,9 @@
-package com.example.cdc.ui
+package com.example.cdc.ui.informationReport
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.cdc.AdministratorActivity
 import com.example.cdc.CommonUserActivity
 import com.example.cdc.R
 

@@ -34,7 +34,7 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/questionnaire_list"
+        android:id="@+id/questionnaire_list_view"
         android:layout_width="380dp"
         android:layout_height="478dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

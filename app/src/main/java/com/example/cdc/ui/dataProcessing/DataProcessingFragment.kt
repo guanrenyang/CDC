@@ -30,7 +30,7 @@ class DataProcessingFragment : Fragment() {
         val root: View = binding.root
         val buttonViewQuestionnaireList: Button = binding.ViewQuestionnaireListButton
         buttonViewQuestionnaireList.setOnClickListener {
-            val intent: Intent = Intent(activity, ViewQuestionnaireListActivity::class.java)
+            val intent = Intent(activity, ViewQuestionnaireListActivity::class.java)
             startActivity(intent)
         }
         val buttonChangeQuestionnaireContent: Button = binding.ChangeQuestionnaireContentButton
