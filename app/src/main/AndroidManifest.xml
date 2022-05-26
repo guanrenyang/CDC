@@ -37,21 +37,25 @@
             android:name=".ui.dataProcessing.ChangeQuestionnaireContentActivity"
             android:exported="false"
             android:label="更改问卷内容"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.dataProcessing.ViewQuestionnaireListActivity"
             android:exported="false"
             android:label="问卷列表查看"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:parentActivityName=".AdministratorActivity" />
         <activity
             android:name=".ui.dataProcessing.ViewAbnormalQuestionnaireListActivity"
             android:exported="false"
             android:label="异常问卷列表查看"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity" />
         <activity
             android:name=".ui.dataProcessing.ViewQuestionnaireActivity"
             android:exported="false"
             android:label="问卷信息查看"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:parentActivityName=".ui.dataProcessing.ViewQuestionnaireListActivity" />
         <activity
             android:name=".ui.informationReport.SubmitSuccessMessageActivity"
