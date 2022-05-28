@@ -140,32 +140,32 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 val nameStr: String = username.text.toString()
                 val passwordStr: String = password.text.toString()
-                loginViewModel.login(nameStr, passwordStr, "result")
-//                val request: Request = Request.Builder()
-//                    .url("${BASE_URL}/user_login.php?name=$nameStr&password=$passwordStr")
-//                    .build()
-//                val call: Call = client.newCall(request)
-//                call.enqueue(object : Callback {
-//                    override fun onFailure(call: Call, e: IOException) {
-//                        runOnUiThread {
-//                            loading.isVisible = false
-//                            Toast.makeText(applicationContext, "Connection Failed", Toast.LENGTH_SHORT).show();
-//                        }
-//                        Log.e("OkHttp","get response onFailure :${e.message}")
-//                    }
-//
-//                    override fun onResponse(call: Call, response: Response) {
-//                        val body:String? = response.body?.string()
-//                        runOnUiThread { //
-//                            //解析响应报文body:
-//                            var res = body?.split(";")
-//                            val res_array:Array<String> = res?.toTypedArray()!!
-//                            val result : String = res_array[0]
-//                            loginViewModel.login(nameStr, passwordStr, result)
-//                        }
-//                        Log.e("OkHttp","get response successfully :${body}")
-//                    }
-//                })
+//                loginViewModel.login(nameStr, passwordStr, "result")
+                val request: Request = Request.Builder()
+                    .url("${BASE_URL}/user_login.php?name=$nameStr&password=$passwordStr")
+                    .build()
+                val call: Call = client.newCall(request)
+                call.enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        runOnUiThread {
+                            loading.isVisible = false
+                            Toast.makeText(applicationContext, "Connection Failed", Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e("OkHttp","get response onFailure :${e.message}")
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val body:String? = response.body?.string()
+                        runOnUiThread { //
+                            //解析响应报文body:
+                            var res = body?.split(";")
+                            val res_array:Array<String> = res?.toTypedArray()!!
+                            val result : String = res_array[0]
+                            loginViewModel.login(nameStr, passwordStr, result)
+                        }
+                        Log.e("OkHttp","get response successfully :${body}")
+                    }
+                })
 
             }
         }
