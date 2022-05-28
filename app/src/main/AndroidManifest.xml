@@ -24,15 +24,15 @@
         <activity
             android:name=".ui.searchInfo.SelfInfo"
             android:exported="false"
-            android:parentActivityName=".AdministratorActivity" />
+            android:parentActivityName=".CommonUserActivity" />
         <activity
             android:name=".ui.searchInfo.PolicyInfo"
             android:exported="false"
-            android:parentActivityName=".AdministratorActivity" />
+            android:parentActivityName=".CommonUserActivity" />
         <activity
             android:name=".ui.searchInfo.ACBoard"
             android:exported="false"
-            android:parentActivityName=".AdministratorActivity" />
+            android:parentActivityName=".CommonUserActivity" />
         <activity
             android:name=".ui.dataProcessing.ChangeQuestionnaireContentActivity"
             android:exported="false"

@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.example.cdc.R
 import com.example.cdc.databinding.FragmentInformationReportBinding
 import com.example.cdc.ui.Questionnaire
 import com.example.cdc.ui.login.afterTextChanged
+import com.example.cdc.ui.searchInfo.SelfInfo
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -31,6 +33,9 @@ class InformationReportFragment : Fragment() {
 //    private val answerList = mutableListOf<String>("", "", "")
     private var _binding: FragmentInformationReportBinding? = null
     private val binding get() = _binding!!
+
+    var id = ""
+    var name = ""
 
     val BASE_URL = "http://124.71.150.114"
     val client: OkHttpClient = OkHttpClient.Builder()    //builder构造者设计模式
@@ -67,7 +72,7 @@ class InformationReportFragment : Fragment() {
                     questionnaire.questionList = res_list
                     questionnaire.answerList = MutableList<String>(questionnaire.questionList.size){""}
                     val informationView: RecyclerView = binding.informationView
-                    val informationAdapter = InformationViewAdapter(questionnaire.questionList,questionnaire.answerList)
+                    val informationAdapter = InformationViewAdapter(questionnaire.questionList,questionnaire.answerList,id,name)
                     informationView.adapter = informationAdapter
                 }
             }
@@ -107,9 +112,41 @@ class InformationReportFragment : Fragment() {
                 val body: String? = response.body?.string()
                 activity?.runOnUiThread { //
                     val intent = Intent(activity, SubmitSuccessMessageActivity::class.java)
+                    intent.putExtra("safety", questionnaire.safety)
                     startActivity(intent)
                 }
                 Log.e("OkHttp", "get response successfully :${body}")
+            }
+
+        })
+    }
+
+    /*
+    *  user_get_selfinfo(Id:String):用户通过该函数向个人信息数据库请求数据，输入参数为个人的id
+        get成功后返回一个String，每个元素用 ; 隔开。元素分别是id;name;age;address;gender(0-->女人，1-->男人);healthy(0-->未感染新冠，1-->感染新冠)
+        可以使用string.split()函数解析报文
+        测试数据:uesr_get_selfinfo("0318")
+    */
+    fun user_get_selfinfo(Id: String){
+        val request: Request = Request.Builder()
+            .url("${BASE_URL}/user_get_selfinfo.php?Id=$Id")
+            .build()
+        val call:Call = client.newCall(request)
+        call.enqueue(object :Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("OkHttp","get response onFailure :${e.message}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val body:String? = response.body?.string()
+                activity?.runOnUiThread { //
+                    //解析响应报文body:
+                    var res = body?.split(";")
+                    val res_array:Array<String> = res?.toTypedArray()!!
+                    id = res_array[0]
+                    name = res_array[1]
+                }
+                Log.e("OkHttp","get response successfully :${body}")
             }
 
         })
@@ -128,9 +165,14 @@ class InformationReportFragment : Fragment() {
             for(i in questionnaire.questionList.indices){
                 mMap[questionnaire.questionList[i]] = questionnaire.answerList[i]
             }
+            mMap["id"] = id
+            mMap["name"] = name
             mMap["safety"] = questionnaire.safety.toString()
             user_post_info(mMap)
         }
+
+        val account = arguments?.getString("account").toString()
+        user_get_selfinfo("0318")
 //        val informationView = binding.informationView
 //        val informationAdapter = InformationViewAdapter(questionList,answerList)
 //        informationView.adapter = informationAdapter
@@ -142,7 +184,9 @@ class InformationReportFragment : Fragment() {
 
     class InformationViewAdapter(
         private val questionList: MutableList<String>,
-        private val answerList: MutableList<String>
+        private val answerList: MutableList<String>,
+        private val id: String,
+        private val name: String
     ) :
         RecyclerView.Adapter<InformationViewAdapter.InformationViewHolder>() {
         inner class InformationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -153,6 +197,16 @@ class InformationReportFragment : Fragment() {
 
             fun bind(question: String, index: Int) {
                 questionTextView.text = question
+                if(question == "id")
+                {
+                    answerTextView.setText(id)
+                    answerTextView.isEnabled = false
+                }
+                if(question == "name")
+                {
+                    answerTextView.setText(name)
+                    answerTextView.isEnabled = false
+                }
                 answerTextView.afterTextChanged{
                     val answerEdited = answerTextView.text.toString()
                     saveAnswer(answerEdited, index)

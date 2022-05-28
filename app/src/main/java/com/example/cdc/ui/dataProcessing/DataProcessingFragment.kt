@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cdc.databinding.FragmentDataProcessingBinding
+import com.example.cdc.ui.login.LoginActivity
 
 class DataProcessingFragment : Fragment() {
 
@@ -37,6 +38,11 @@ class DataProcessingFragment : Fragment() {
 
         buttonChangeQuestionnaireContent.setOnClickListener {
             startActivity(Intent(activity, ChangeQuestionnaireContentActivity::class.java))
+        }
+
+        val buttonBackToLogin: Button = binding.buttonBackToLogin1
+        buttonBackToLogin.setOnClickListener {
+            startActivity(Intent(activity, LoginActivity::class.java))
         }
         return root
     }

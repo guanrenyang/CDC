@@ -17,7 +17,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.cdc.databinding.FragmentSearchInfoBinding
-
+import com.example.cdc.ui.dataProcessing.ChangeQuestionnaireContentActivity
+import com.example.cdc.ui.login.LoginActivity
 
 
 class SearchInfoFragment : Fragment() {
@@ -93,6 +94,11 @@ class SearchInfoFragment : Fragment() {
             binding.numberPickerSearchPolicy.isVisible = false
             binding.buttonNumberPickerConfirm.isVisible = false
         }
+
+        val buttonBackToLogin: Button = binding.buttonBackToLogin2
+        buttonBackToLogin.setOnClickListener {
+                startActivity(Intent(activity, LoginActivity::class.java))
+            }
 
         val datePickerDateSelection: DatePicker = binding.datePickerSearchDate
         datePickerDateSelection.isVisible = false

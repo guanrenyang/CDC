@@ -138,6 +138,21 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="20dp"/>
 
+    <Button
+        android:id="@+id/button_back_to_login_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:text="返回登录"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

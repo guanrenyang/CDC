@@ -1,6 +1,7 @@
 package com.example.cdc.ui.dataProcessing
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,14 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cdc.R
 import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import com.example.cdc.ui.Question
+import com.example.cdc.ui.informationReport.SubmitSuccessMessageActivity
+import com.example.cdc.ui.searchInfo.SelfInfo
 
 
 class ChangeQuestionnaireContentActivity : AppCompatActivity() {
@@ -88,6 +93,8 @@ class ChangeQuestionnaireContentActivity : AppCompatActivity() {
                 runOnUiThread {
                     val res = body?.split(";")
                     val res_list:MutableList<String> = res?.toMutableList()!!
+                    res_list.remove("id")
+                    res_list.remove("name")
                     res_list.remove("safety")
                     res_list.remove("\n")
                     question.questionList = res_list
@@ -117,13 +124,19 @@ class ChangeQuestionnaireContentActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         user_get_table()
         val saveListButton: Button = findViewById(R.id.Save_ChangeQuestionnaireContent)
-        saveListButton.setOnClickListener() {
+        saveListButton.setOnClickListener() {view ->
+
             val postList= mutableListOf<String>()
+            postList.add("id")
+            postList.add("name")
             postList.addAll(question.questionList)
             postList.add("safety")
             admin_post_table(postList)
+            val text = "发布问卷成功"
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(applicationContext, text, duration)
+            toast.show()
         }
-
     }
 
     class ChangeQuestionnaireContentViewAdapter(private val questionList: MutableList<String>) :
