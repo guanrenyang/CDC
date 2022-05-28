@@ -104,19 +104,19 @@ class SelfInfo : AppCompatActivity() {
                     holder.bind("Sex: 男")
                 }
             }
-            if(position % 6 == 5){
-                if(selfInfoList[position][0]=='0'){
-                    holder.bind("Health: 未感染新冠")
-                }
-                if(selfInfoList[position][0]=='1'){
-                    holder.bind("Health: 感染新冠")
-                }
-            }
+//            if(position % 6 == 5){
+//                if(selfInfoList[position][0]=='0'){
+//                    holder.bind("Health: 未感染新冠")
+//                }
+//                if(selfInfoList[position][0]=='1'){
+//                    holder.bind("Health: 感染新冠")
+//                }
+//            }
 
         }
 
         override fun getItemCount(): Int {
-            return selfInfoList.size - 1
+            return selfInfoList.size - 2
         }
 
     }
